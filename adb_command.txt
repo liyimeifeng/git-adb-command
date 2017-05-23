@@ -1,0 +1,101 @@
+# 退出adb
+$ ctrl + C
+
+# 设置网络adb
+$ adb tcpip 5555
+  adb connect ipAddress:5555
+
+# 查看CPU占用率
+$ adb -s emulator-5554 shell
+  top -m 10 -s cpu
+
+adb shell dumpsys meminfo <package_name>(查看内存使用情况)
+
+# 查看指定程序内存使用情况
+$ 在adb shell里输入：dumpsys meminfo <package_name>
+
+# 推送电脑文件到设备
+$ adb push e:/video-js.rar /sdcard/Android/data/com.zopodo.terminal/files
+$ adb push e:/video-js.rar /sdcard/Download
+
+# 查看文件夹
+$ adb shell
+  或者cd sdcard 查看根目录然后ls
+  或者cd /data/data/ 
+  pm list package，查看所有包名
+  cd 包名
+  ls
+  su
+
+# 查看文件内容
+$ adb shell cat /sdcard/Download/test.txt
+
+# 备份手机系统
+$ adb backup -all (备份整个系统)
+$ adb backup [-f <file>] [-apk|-noapk] [-shared|-noshared][-all] [-system|nosystem][<packages...>]
+  代码 -f<file>设置备份后的文件名和路径。比如"C:\dxy.ab"，扩展名是ab。
+  代码:-apk|-noapk选择是否备份APK程序本身。
+  代码:-shared|-noshared是否备份SD卡。
+  代码:-system|-nosystem是否备份系统程序。
+  代码:<packages...>指定备份具体的应用程序。
+如：adb backup -nosystem -noshared -apk -f com.tantan.apk com.p1.moblie.putong
+    adb backup -f mm.ab -noapk -noshared -nosystem com.tencent.mm
+
+# 恢复备份的数据
+$ adb restore <your backup file dir> 或 adb restore com.tantan.apk
+
+# 查看设备ip地址
+$ adb shell netcfg
+
+#用adb获得手机里面某个apk的应用信息、版本信息
+$ adb shell dumpsys package com.sy.a268
+
+# 列出所有
+　adb shell dumpsys 
+
+# 用adb启动apk
+　　adb shell am start -n com.sy.a268/com.sy.a268.MainActivity
+
+# 强行停止某一个进程
+  adb shell  am force-stop <package>
+比如： am force-stop com.android.launcher
+
+# 随机产生事件给某个应用程序, 随机产生500个事件给程序。你会发现你的程序不断的被点击，旋转！
+　　adb  shell  monkey -p  com.sy.a268  -v 500
+
+# 将应用程序的apk文件push到手机中
+   adb push d:/xxxx.apk /system/app.
+
+# 用adb install xxxx.apk进行安装
+
+
+# 用直接安装的方式进行安装,会将应用程序安装到 /data/local/tmp/ 目录下,设备中不会保存apk文件
+  adb install -r /home/SoundRecorder.apk     //注： -r 表示强制安装
+  adb install --(apk完整路径）
+  例如：adb install c:/NetScramble_1.1.apk
+	adb install /sdcard/QQ_500.apk
+
+# 卸载APK
+  adb shell rm data/app/NetScramble_1.1.apk 
+
+# 进入指定设备或模拟器
+$ adb devices
+    List of devices attached
+    emulator-5554   device
+    emulator-5556   device
+
+  adb -s emulator-5554 shell
+
+# 截屏命令
+$ adb shell /system/bin/screencap -p /sdcard/screenshot.png（保存到SDCard）
+  adb pull /sdcard/screenshot.png d:/screenshot.png（保存到电脑，注意 F:\\mvp 为电脑路径，必须存在）
+
+# 截屏直接保存到电脑
+$ adb shell screencap -p | sed 's/\r$//' > screenshot.png
+  adb shell screencap -p savePath.png  （系统2.3以上）
+  adb shell screenshot xxx.png          (系统4.0以上)
+  例如：需要注意的是，图片会保存在当前 cmd 启动的路径，screen.png 为图片的名字
+
+比如我在 C:\Users\Administrator 执行命令，那么将会保存在 C:\Users\Administrator 目录下。
+
+C:\Users\Administrator>adb shell screencap -p | sed 's/\r$//' > screen.png
