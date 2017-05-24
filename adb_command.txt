@@ -20,15 +20,34 @@ $ adb push e:/video-js.rar /sdcard/Download
 
 # 查看文件夹
 $ adb shell
-  或者cd sdcard 查看根目录然后ls
+  或者cd sdcard 查看根目录然后ls（cd /mnt/sdcard/Android/data/com.zopodo.terminal/）
   或者cd /data/data/ 
   pm list package，查看所有包名
   cd 包名
-  ls
+  ls -l （查看文件详细信息）
   su
 
 # 查看文件内容
 $ adb shell cat /sdcard/Download/test.txt
+
+# 查看数据库
+$ adb shell
+  cd /data/data/
+  cd com.zopodo.terminal
+  cd databases
+  ls -l
+  sqlite3 info.db   (进入某数据库)
+  .tables           (查看建的表)
+  select * from table_name;   (查看整个表的信息，注意有分号)
+  .exit 或者 .quit  (退出数据库)
+
+
+# 查看打印的日志，和在AS上查看控制台日志一样
+$ adb logcat
+  adb logcat -s System.out   (过滤日志，只输出这些开头的日志)
+$ adb shell
+  logcat | grep error    （过滤日志，只显示有error的)
+  
 
 # 备份手机系统
 $ adb backup -all (备份整个系统)
