@@ -5,22 +5,27 @@ $ ctrl + C
 $ adb tcpip 5555
   adb connect ipAddress:5555
 
-# 查看CPU号
+# 查看CPU信息
 $ adb shell
-  cat /proc/cpuinfo
-
-# 查看mac地址
-$ adb shell
-  cat /sys/class/net/wlan0/address
+  cat /proc/cpuinfo 或者dumpsys cpuinfo
 
 # 查看CPU占用率
 $ adb -s emulator-5554 shell
   top -m 10 -s cpu
 
-adb shell dumpsys meminfo <package_name>(查看内存使用情况)
+# 查看mac地址
+$ adb shell
+  cat /sys/class/net/wlan0/address
 
-# 查看指定程序内存使用情况
-$ 在adb shell里输入：dumpsys meminfo <package_name>
+# 查看系统存储
+$ adb shell df
+
+# 查看系统内存信息
+$ adb shell
+  cat /proc/meminfo 或者 dumpsys meminfo
+
+# 查看某个应用、进程内存使用情况
+$ adb shell dumpsys meminfo com.zopodo.terminal
 
 # 推送电脑文件到设备
 $ adb push e:/video-js.rar /sdcard/Android/data/com.zopodo.terminal/files
