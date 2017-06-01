@@ -5,6 +5,14 @@ $ ctrl + C
 $ adb tcpip 5555
   adb connect ipAddress:5555
 
+# 查看CPU号
+$ adb shell
+  cat /proc/cpuinfo
+
+# 查看mac地址
+$ adb shell
+  cat /sys/class/net/wlan0/address
+
 # 查看CPU占用率
 $ adb -s emulator-5554 shell
   top -m 10 -s cpu
