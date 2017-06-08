@@ -263,6 +263,16 @@ $ git reset --keep [commit]
 # 后者的所有变化都将被前者抵消，并且应用到当前分支
 $ git revert [commit]
 
-# 暂时将未提交的变化移除，稍后再移入
+# 暂时将工作区未提交的变化保存到git栈中，稍后再移入
 $ git stash
+  .......
 $ git stash pop
+
+# 解决本地与远程库冲突
+  git add filename
+  git commit 
+  git pull --rebase 
+ (若有冲突，分两种，一是在不同的地方冲突，git可自己合并。二是在同一个地方冲突，自己手动更改，然后)
+  git rebase --continue
+ (重复第三、四步直到所有冲突都解决)
+  git push
