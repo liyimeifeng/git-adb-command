@@ -1,9 +1,15 @@
 # 退出adb
 $ ctrl + C
 
-# 设置网络adb
+# 设置网络adb（通过USB方式）
 $ adb tcpip 5555
   adb connect ipAddress:5555
+
+# 在手机上开启ADB，首先在手机设备上下载模拟终端命令行界面，运行（要有root权限）
+  su
+  setprop service.adb.tcp.port 555
+  stop adbd 
+  start adbd
 
 # 查看CPU信息
 $ adb shell
@@ -28,8 +34,8 @@ $ adb shell
 $ adb shell dumpsys meminfo com.zopodo.terminal
 
 # 推送电脑文件到设备
-$ adb push e:/video-js.rar /sdcard/Android/data/com.zopodo.terminal/files
-$ adb push e:/video-js.rar /sdcard/Download
+$ adb push e:/video-js /sdcard/Android/data/com.zopodo.terminal/files
+$ adb push e:/video-js /sdcard/Download
 
 # 查看文件夹
 $ adb shell
@@ -51,8 +57,12 @@ $ adb shell
   ls -l
   sqlite3 info.db   (进入某数据库)
   .tables           (查看建的表)
-  select * from table_name;   (查看整个表的信息，注意有分号)
+  pragma table_info(table-name)  (可选，查看表的数据结构)
+  .mode line (可选，接上面切换显示模式，然后再重新输入pragma命令)
+  select * from table-name;   (查看整个表的信息，注意有分号)
   .exit 或者 .quit  (退出数据库)
+
+ctrl + Z返回到上一级
 
 
 # 查看打印的日志，和在AS上查看控制台日志一样
@@ -99,7 +109,7 @@ $ adb shell dumpsys package com.sy.a268
    adb push d:/xxxx.apk /system/app.
 
 # 用adb install xxxx.apk进行安装
-
+  例如： adb install -r app.apk
 
 # 用直接安装的方式进行安装,会将应用程序安装到 /data/local/tmp/ 目录下,设备中不会保存apk文件
   adb install -r /home/SoundRecorder.apk     //注： -r 表示强制安装
@@ -109,6 +119,9 @@ $ adb shell dumpsys package com.sy.a268
 
 # 卸载APK
   adb shell rm data/app/NetScramble_1.1.apk 
+
+例如:
+  adb uninstall com.zopodo.terminal
 
 # 进入指定设备或模拟器
 $ adb devices
