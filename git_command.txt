@@ -184,6 +184,13 @@ $ git reflog
 # 下载远程仓库的所有变动
 $ git fetch [remote]
 
+# 遇见“请输入提交消息解释为什么这种合并是必要的”
+$ git 在pull或者合并分支的时候有时会遇到。可以不管(直接下面3,4步)，如果要输入解释的话就需要:
+  1.按键盘字母 i 进入insert模式
+  2.修改最上面那行黄色合并信息,可以不修改
+  3.按键盘左上角"Esc
+  4.输入":wq",注意是冒号+wq,按回车键即可
+
 # 首先从远程的origin的master主分支下载最新的版本到origin/master分支上(推荐用这种方式！！！！)
    然后比较本地的master分支和origin/master分支的差别
    最后进行合并
@@ -254,7 +261,15 @@ $ git checkout .
 $ git reset [file]
 
 # !!!如出现Unmerged paths....等等，也可以使用这一句
-$ git reset
+$ git reset --hard 
+
+# 若出现本地和暂存区冲突，“your local changes would be overwritten by merge. commit stash or revert them to proceed.”
+$  有三种做法：
+  1、提交改动  git commit -m "change"
+  2、暂存        git stash    
+                 git stash pop
+  3、抛弃本地所有改动   git reset --hard
+
 
 # 重置暂存区与工作区，与上一次commit保持一致
 $ git reset --hard
