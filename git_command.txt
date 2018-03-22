@@ -71,14 +71,10 @@ $ git commit --amend -m [message]
 # 重做上一次commit，并包括指定文件的新变化
 $ git commit --amend [file1] [file2] ...
 
-# 列出所有本地分支
-$ git branch
-
-# 列出所有远程分支
-$ git branch -r
-
-# 列出所有本地分支和远程分支
-$ git branch -a
+# 列出分支
+$ git branch  （所有本地）
+$ git branch -a (本地和远程所有分支)
+$ git branch -r  (远程所有分支) 
 
 # 新建一个分支，但依然停留在当前分支
 $ git branch [branch-name]
@@ -306,3 +302,21 @@ $ git stash pop
   git rebase --continue
  (重复第三、四步直到所有冲突都解决)
   git push
+  
+# 合并分支
+  1、进入要合并的分支（如开发分支合并到master，则进入master目录）
+	git pull
+  2、查看所有分支是否都pull下来了
+	git branch -a
+  3、使用merge合并开发分支
+	git merge 分支名
+  4、查看合并之后的状态
+	git status	
+  5、有冲突的话，通过IDE解决冲突；
+  6、解决冲突之后，将冲突文件提交暂存区
+	git add 冲突文件
+  7、提交merge之后的结果
+	git commit 
+  如果不是使用git commit -m "备注" ，那么git会自动将合并的结果作为备注，提交本地仓库；
+  8、本地仓库代码提交远程仓库
+	git push  
