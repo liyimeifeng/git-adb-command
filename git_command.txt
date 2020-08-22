@@ -116,6 +116,9 @@ $ git branch --set-upstream [branch] [remote-branch]
 # ºÏ²¢Ö¸¶¨·ÖÖ§µ½µ±Ç°·ÖÖ§
 $ git merge [branch]
 
+# ºÏ²¢Ö¸¶¨·ÖÖ§µÄÖ¸¶¨Ìá½»µ½µ±Ç°·ÖÖ§
+$ git cherry-pick [commitId](²»ĞèÒªÖ¸¶¨·ÖÖ§Ãû)
+
 # Ñ¡ÔñÒ»¸öcommit£¬ºÏ²¢½øµ±Ç°·ÖÖ§
 $ git cherry-pick [commit]
 
@@ -356,3 +359,13 @@ git ÔÚpull»òÕßºÏ²¢·ÖÖ§µÄÊ±ºòÓĞÊ±»áÓöµ½Õâ¸ö½çÃæ¡£¿ÉÒÔ²»¹Ü(Ö±½ÓÏÂÃæ3,4²½)£¬Èç¹ûÒªÊ
 # ÍË³ömerging×´Ì¬
   // ³·Ïúmerge  
   $ git reset --hard HEAD (or sha_1)  
+  
+# ĞŞ¸Ädev·ÖÖ§ÉÏµÄÄ³´ÎcommitĞÅÏ¢
+  ÏÈ²é¿´commitÊÇµ¹ÊıµÚ¼¸´ÎÌá½»
+  1¡¢git rebase -i dev~3(±íÊ¾µ¹ÊıµÚÈı´ÎÌá½»)
+  2¡¢½øÈëvimÄ£Ê½£¬½«ÒªĞŞ¸ÄµÄcommitÇ°ÃæµÄpick¸ÄÎªedit£¬±£´æÍË³ö
+  3¡¢git commit --amend£¬È»ºó±à¼­Ä£Ê½ÏÂĞŞ¸ÄcommitµÄĞÅÏ¢
+  4¡¢git rebase --continue
+  5¡¢git log²é¿´ĞŞ¸Ä
+  6¡¢git push --force origin dev ½øĞĞÇ¿ÖÆ¸üĞÂ
+  
